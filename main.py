@@ -43,6 +43,7 @@ class Coffee(QMainWindow):
         if res == list():
             self.listWidget.addItem(QListWidgetItem("Ничего не найденно!"))
 
+
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
 
