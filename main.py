@@ -23,22 +23,22 @@ class Coffee(QMainWindow):
         curr = bd.cursor()
         if self.comboBox.currentText() == 'Объем':
             res = curr.execute(f'''SELECT * FROM information
-                                    WHERE volum == {text}''').fetchall()
+                                    WHERE volum = {text}''').fetchall()
         elif self.comboBox.currentText() == 'Название':
             res = curr.execute(f'''SELECT * FROM information
-                                    WHERE name == {text}''').fetchall()
+                                    WHERE name = "{text}"''').fetchall()
         elif self.comboBox.currentText() == 'Степень обжарки':
             res = curr.execute(f'''SELECT * FROM information
-                                    WHERE degree == {text}''').fetchall()
+                                    WHERE degree = {text}''').fetchall()
         else:
             res = curr.execute(f'''SELECT * FROM information
-                                    WHERE condition == {text}''').fetchall()
+                                    WHERE condition = "{text}"''').fetchall()
         bd.close()
         self.listWidget.clear()
         for i in res:
             word = ''
             for elem in range(1, len(i)):
-                word += str(elem) + ", "
+                word += str(i[elem]) + ", "
             self.listWidget.addItem(QListWidgetItem(word))
         if res == list():
             self.listWidget.addItem(QListWidgetItem("Ничего не найденно!"))
