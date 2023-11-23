@@ -63,12 +63,7 @@
     </item>
     <item>
      <property name="text">
-      <string>Молотое</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>В зёрнах</string>
+      <string>Состояние</string>
      </property>
     </item>
    </widget>
