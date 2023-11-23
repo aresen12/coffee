@@ -34,7 +34,6 @@ class Coffee(QMainWindow):
             res = curr.execute(f'''SELECT * FROM information
                                     WHERE condition == {text}''').fetchall()
         bd.close()
-        print(res)
         self.listWidget.clear()
         for i in res:
             word = ''
