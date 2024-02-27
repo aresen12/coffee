@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QApplication, QPushButton, QMainWindow, QComboBox, QLineEdit, QListWidget, QListWidgetItem
+from PyQt5.QtWidgets import QApplication, QPushButton, QMainWindow, QComboBox, QLineEdit, QListWidget, QListWidgetItem, \
+    QTableWidget, QTableWidgetItem
 import sys
 from PyQt5 import uic
 import sqlite3
@@ -9,7 +10,22 @@ class Coffee(QMainWindow):
         super().__init__()
         uic.loadUi('main.ui', self)
         self.poisk_btn: QPushButton
+        self.tableWidget: QTableWidget
         self.poisk_btn.clicked.connect(self.coffee)
+        conn = sqlite3.connect('coffee.sqlite')
+        curr = conn.cursor()
+        res = curr.execute('''SELECT * FROM information''').fetchall()
+        conn.close()
+        self.tableWidget.setColumnCount(len(res[0]))
+        self.tableWidget.setHorizontalHeaderLabels(
+            ['ID', "название", "Степень обжарки", "Состояние", "описание", "цена", "обьём"])
+        self.tableWidget.setRowCount(0)
+        for i in range(len(res)):
+            self.tableWidget.setRowCount(
+                self.tableWidget.rowCount() + 1)
+            for j, elem in enumerate(res[i]):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(elem)))
+        self.tableWidget.resizeColumnsToContents()
 
     def coffee(self):
         self.comboBox: QComboBox
