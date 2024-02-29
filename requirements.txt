@@ -1,3 +1,1 @@
-PyQt5
-sys
-sqlite3
+Pyqt5 == 5.15.10
